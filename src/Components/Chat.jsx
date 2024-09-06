@@ -1,5 +1,7 @@
 import {
   AttachFile,
+  DeleteOutline,
+  DeleteOutlineOutlined,
   InsertEmoticon,
   Mic,
   MoreVert,
@@ -68,7 +70,7 @@ const Chat = () => {
     setinput("");
   };
   return (
-    <div className="w-[65%] flex flex-col">
+    <div className="w-full sm:w-[65%] flex flex-col">
       <div className="chat_header p-2 flex items-center border-b">
         <Avatar
           src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${seed}`}

@@ -21,9 +21,9 @@ const Login = () => {
       });
   };
   return (
-    <div className="w-[70vw] h-[70vh] bg-white rounded-xl shadow-xl flex flex-col items-center justify-center gap-2">
+    <div className="h-[50vh] w-[80vw] sm:w-[70vw] sm:h-[70vh] bg-white rounded-xl shadow-xl flex flex-col items-center justify-center gap-2">
       <img
-        className="w-56"
+        className="w-32 sm:w-56"
         src="https://static.vecteezy.com/system/resources/previews/022/794/113/large_2x/3d-render-whatsapp-logo-icon-isolated-on-transparent-background-free-png.png"
         alt=""
       />

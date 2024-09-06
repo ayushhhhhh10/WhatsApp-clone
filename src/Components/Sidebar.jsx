@@ -29,7 +29,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="m-1 py-2 px-1 w-[35%] h-full border-r-2 flex flex-col">
+    <div className="m-1 py-2 px-1 w-full sm:w-[35%] h-full border-r-2 flex flex-col">
       <div className="sidebar_header flex items-center justify-between">
         <Avatar src={user?.photoURL} />
         <div className="sidebar_header_right flex text-zinc-600">

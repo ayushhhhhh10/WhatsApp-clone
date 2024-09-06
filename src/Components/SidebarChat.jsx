@@ -1,14 +1,18 @@
-import { Avatar } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
 import db from "../Firebase";
 import { Link } from "react-router-dom";
+import { DeleteOutline } from "@mui/icons-material";
 
 const SidebarChat = ({ id, name, addNewChat }) => {
   const [seed, setseed] = useState("");
@@ -47,16 +51,33 @@ const SidebarChat = ({ id, name, addNewChat }) => {
     }
   };
 
+  const deleteChat = async () => {
+    if (window.confirm("Are you sure you want to delete this chat room?")) {
+      await deleteDoc(doc(db, "rooms", id));
+      const messagesSnapshot = await getDocs(
+        collection(db, "rooms", id, "messages")
+      );
+      messagesSnapshot.forEach(async (messageDoc) => {
+        await deleteDoc(doc(db, "rooms", id, "messages", messageDoc.id));
+      });
+    }
+  };
+
   return !addNewChat ? (
     <Link to={`/rooms/${id}`}>
-      <div className="flex p-4 gap-3 border-b items-center hover:bg-[#ebebeb] cursor-pointer duration-300">
-        <Avatar
-          src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${seed}`}
-        />
-        <div>
-          <h2 className="text-lg font-semibold">{name}</h2>
-          <p className="text-sm opacity-70">{messages[0]?.message}</p>
+      <div className="flex p-4 gap-3 border-b items-center justify-between hover:bg-[#ebebeb] cursor-pointer duration-300">
+        <div className="flex gap-5">
+          <Avatar
+            src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${seed}`}
+          />
+          <div>
+            <h2 className="text-lg font-semibold">{name}</h2>
+            <p className="text-sm opacity-70">{messages[0]?.message}</p>
+          </div>
         </div>
+        <IconButton onClick={deleteChat}>
+          <DeleteOutline />
+        </IconButton>
       </div>
     </Link>
   ) : (
